@@ -70,8 +70,6 @@ commands:
 
   bundle-test-setup:
     steps:
-      - attach_workspace:
-          at: ~/json-transform-stream
       - create-test-project
       - run:
           name: test setup
@@ -79,7 +77,12 @@ commands:
           command: |
             npm i -D jest
             npm i -S ~/json-transform-stream/haensl-json-transform-stream.tgz
-            cp ~/json-transform-stream/json-transform-stream.package.test.js ./
+      - checkout:
+          path: ..
+      - run:
+          name: copy package test
+          working_directory: /tmp/test-app
+          cp ../json-transform-stream/json-transform-stream.package.test.js ./
 
   package-test-setup:
     steps:
@@ -115,14 +118,12 @@ workflows:
     jobs:
       - lint
       - test
+      - ensure-versioned-correctly:
       - bundle:
           requires:
             - lint
             - test
       - bundle-test:
-          requires:
-            - bundle
-      - ensure-versioned-correctly:
           requires:
             - bundle
       - publish:
