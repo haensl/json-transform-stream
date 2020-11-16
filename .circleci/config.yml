@@ -215,6 +215,7 @@ jobs:
       - attach_workspace:
           at: ~/json-transform-stream
       - init
+      - prepare-repo
       - extract-versions
       - run:
           name: changelog matches package.json
