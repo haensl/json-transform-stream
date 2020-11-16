@@ -118,7 +118,7 @@ workflows:
     jobs:
       - lint
       - test
-      - ensure-versioned-correctly:
+      - ensure-versioned-correctly
       - bundle:
           requires:
             - lint
