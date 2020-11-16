@@ -1,0 +1,7 @@
+__fixtures__/
+test-results/
+*.md
+.*
+*.test.*
+deploy
+*.token.png
