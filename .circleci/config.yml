@@ -70,6 +70,8 @@ commands:
 
   bundle-test-setup:
     steps:
+      - attach_workspace:
+          at: ~/json-transform-stream
       - create-test-project
       - run:
           name: test setup
@@ -77,12 +79,7 @@ commands:
           command: |
             npm i -D jest
             npm i -S ~/json-transform-stream/haensl-json-transform-stream.tgz
-      - checkout:
-          path: ..
-      - run:
-          name: copy package test
-          working_directory: /tmp/test-app
-          command: cp ../json-transform-stream/json-transform-stream.package.test.js ./
+            cp ~/json-transform-stream/json-transform.stream.package.test.js ./
 
   package-test-setup:
     steps:
@@ -170,50 +167,11 @@ jobs:
       - store_test_results:
           path: test-results
 
-  bundle:
-    docker:
-      - image: circleci/node:lts
-    working_directory: ~/json-transform-stream
-    steps:
-      - init
-      - prepare-repo
-      - run:
-          name: generate tarball
-          command: |
-            npm pack
-            mv haensl-json-transform-stream-${VERSION}.tgz haensl-json-transform-stream.tgz
-      - store_artifacts:
-          path: haensl-json-transform-stream.tgz
-      - persist_to_workspace:
-          root: ./
-          paths:
-            - CHANGELOG.md
-            - index.js
-            - README.md
-            - LICENSE
-            - package.json
-            - package-lock.json
-            - haensl-json-transform-stream.tgz
-            - .npmignore
-
-  bundle-test:
-    docker:
-      - image: circleci/node:lts
-    working_directory: /tmp/test-app
-    steps:
-      - init
-      - bundle-test-setup
-      - run:
-          name: test node.js module
-          command: node_modules/.bin/jest --runInBand
-
   ensure-versioned-correctly:
     docker:
       - image: circleci/node:lts
     working_directory: ~/json-transform-stream
     steps:
-      - attach_workspace:
-          at: ~/json-transform-stream
       - init
       - prepare-repo
       - extract-versions
@@ -238,6 +196,44 @@ jobs:
               process.exit(1);
             }
             VERSION_CHECK
+
+  bundle:
+    docker:
+      - image: circleci/node:lts
+    working_directory: ~/json-transform-stream
+    steps:
+      - init
+      - prepare-repo
+      - run:
+          name: generate tarball
+          command: |
+            npm pack
+            mv haensl-json-transform-stream-${VERSION}.tgz haensl-json-transform-stream.tgz
+      - store_artifacts:
+          path: haensl-json-transform-stream.tgz
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - CHANGELOG.md
+            - index.js
+            - README.md
+            - LICENSE
+            - package.json
+            - package-lock.json
+            - haensl-json-transform-stream.tgz
+            - json-transform-stream.package.test.js
+            - .npmignore
+
+  bundle-test:
+    docker:
+      - image: circleci/node:lts
+    working_directory: /tmp/test-app
+    steps:
+      - init
+      - bundle-test-setup
+      - run:
+          name: test node.js module
+          command: node_modules/.bin/jest --runInBand
 
   publish:
     docker:
