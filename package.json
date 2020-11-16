@@ -1,6 +1,6 @@
 {
   "name": "@haensl/json-transform-stream",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A Node.js Transform stream for JSON objects.",
   "main": "index.js",
   "publishConfig": {
