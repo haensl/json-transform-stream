@@ -26,7 +26,7 @@ commands:
           name: extract latest published version
           working_directory: ~/json-transform-stream
           command: |
-            LIVE_VERSION=$(npm show @haensl/json-transform-stream version)
+            LIVE_VERSION=$(npm show @haensl/json-transform-stream version) || '0.0.0'
             echo "export LIVE_VERSION=${LIVE_VERSION}" >> ${BASH_ENV}
             echo "latest published version: ${LIVE_VERSION}"
 
