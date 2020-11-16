@@ -1,4 +1,4 @@
-# json-transform-stream
+# @haensl/json-transform-stream
 A Node.js [Transform Stream](https://nodejs.org/dist/latest-v14.x/docs/api/stream.html#stream_class_stream_transform) implementation that makes wrapping JSON data easy.
 
 [![NPM](https://nodei.co/npm/@haensl%2Fjson-transform-stream.png?downloads=true)](https://nodei.co/npm/@haensl%2Fjson-transform-stream/)
