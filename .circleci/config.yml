@@ -59,7 +59,6 @@ commands:
           key: json-transform-stream-dependencies-{{ checksum "package.json" }}
       - extract-versions
 
-
   create-test-project:
     steps:
       - run:
@@ -79,7 +78,7 @@ commands:
           command: |
             npm i -D jest
             npm i -S ~/json-transform-stream/haensl-json-transform-stream.tgz
-            cp ~/json-transform-stream/json-transform.stream.package.test.js ./
+            cp ~/json-transform-stream/json-transform-stream.package.test.js ./
 
   package-test-setup:
     steps:
