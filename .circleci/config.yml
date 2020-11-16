@@ -82,7 +82,7 @@ commands:
       - run:
           name: copy package test
           working_directory: /tmp/test-app
-          cp ../json-transform-stream/json-transform-stream.package.test.js ./
+          command: cp ../json-transform-stream/json-transform-stream.package.test.js ./
 
   package-test-setup:
     steps:
