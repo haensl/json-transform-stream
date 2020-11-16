@@ -8,9 +8,9 @@
   },
   "scripts": {
     "lint": "eslint '**/*.js'",
-    "lint:junit": "eslint --format junit -o test-results/eslint/results.xml '**/*.js'",
+    "lint:ci": "eslint --format junit -o test-results/eslint/results.xml '**/*.js'",
     "test": "jest --runInBand --no-cache --colors",
-    "test:junit": "jest --runInBand --no-cache --ci --reporters='default' --reporters='jest-junit'",
+    "test:ci": "jest --runInBand --no-cache --ci --reporters='default' --reporters='jest-junit'",
     "tdd": "jest --colors --watch"
   },
   "repository": {
