@@ -12,7 +12,7 @@ module.exports = ({
     transform: (chunk, encoding, callback) => {
       if (first) {
         first = false;
-        console.log('chunky', chunk.toString());
+
         return callback(
           null,
           Buffer.concat([Buffer.from(pre), chunk])
