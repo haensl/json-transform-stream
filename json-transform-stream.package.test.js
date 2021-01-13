@@ -56,6 +56,30 @@ describe('json-transform-stream', () => {
           })
         );
     });
+
+    describe('empty source', () => {
+      beforeEach((done) => {
+        streamed = '';
+        const stream = Readable.from(iterator([]))
+          .pipe(JSONTransform({
+            pre: '{"data":[',
+            post: ']}'
+          }));
+        stream.on('data', (data) => {
+          streamed = `${streamed || ''}${data}`;
+        });
+        stream.on('end', done);
+      });
+
+      it('Allows to setup custom wrapping', () => {
+        expect(streamed)
+          .toEqual(
+            JSON.stringify({
+              data: []
+            })
+          );
+      });
+    });
   });
 
   describe('separator', () => {

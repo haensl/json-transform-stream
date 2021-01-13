@@ -8,8 +8,8 @@ describe('json-transform-stream', () => {
     { index: 3 }
   ];
 
-  const iterator = function* () {
-    for (const d of data) {
+  const iterator = function* (_data = data) {
+    for (const d of _data) {
       yield JSON.stringify(d);
     }
   };
@@ -55,6 +55,30 @@ describe('json-transform-stream', () => {
             data
           })
         );
+    });
+
+    describe('empty source', () => {
+      beforeEach((done) => {
+        streamed = '';
+        const stream = Readable.from(iterator([]))
+          .pipe(JSONTransform({
+            pre: '{"data":[',
+            post: ']}'
+          }));
+        stream.on('data', (data) => {
+          streamed = `${streamed || ''}${data}`;
+        });
+        stream.on('end', done);
+      });
+
+      it('Allows to setup custom wrapping', () => {
+        expect(streamed)
+          .toEqual(
+            JSON.stringify({
+              data: []
+            })
+          );
+      });
     });
   });
 

@@ -12,6 +12,7 @@ module.exports = ({
     transform: (chunk, encoding, callback) => {
       if (first) {
         first = false;
+        console.log('chunky', chunk.toString());
         return callback(
           null,
           Buffer.concat([Buffer.from(pre), chunk])
@@ -23,12 +24,12 @@ module.exports = ({
         Buffer.concat([Buffer.from(separator), chunk])
       );
     },
-    final: function(callback) {
+    flush: function(callback) {
       if (first) {
         this.push(Buffer.from(pre));
-      } else {
-        this.push(Buffer.from(post));
       }
+
+      this.push(Buffer.from(post));
 
       process.nextTick(callback);
     }
