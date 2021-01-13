@@ -8,8 +8,8 @@ describe('json-transform-stream', () => {
     { index: 3 }
   ];
 
-  const iterator = function* () {
-    for (const d of data) {
+  const iterator = function* (_data = data) {
+    for (const d of _data) {
       yield JSON.stringify(d);
     }
   };
