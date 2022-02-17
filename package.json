@@ -1,7 +1,7 @@
 {
   "name": "@haensl/json-transform-stream",
-  "version": "1.0.1",
-  "description": "A Node.js Transform stream for JSON objects.",
+  "version": "1.0.2",
+  "description": "A Node.js Transform stream to wrap JSON data.",
   "main": "index.js",
   "publishConfig": {
     "access": "public"
@@ -9,6 +9,7 @@
   "scripts": {
     "lint": "eslint '**/*.js'",
     "lint:ci": "eslint --format junit -o test-results/eslint/results.xml '**/*.js'",
+    "prepare": "if [ ${NODE_ENV} != 'production' ]; then husky install; fi",
     "test": "jest --runInBand --no-cache --colors",
     "test:ci": "jest --runInBand --no-cache --ci --reporters='default' --reporters='jest-junit'",
     "tdd": "jest --colors --watch"
@@ -28,6 +29,7 @@
     "email": "h.p.dietz@gmail.com",
     "twitter": "@h_p_d"
   },
+  "funding": "https://github.com/sponsors/haensl",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/haensl/json-transform-stream/issues"
@@ -46,11 +48,6 @@
       "sourceType": "module"
     }
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint && npm test"
-    }
-  },
   "jest": {
     "testPathIgnorePatterns": [
       "package\\.test"
@@ -63,9 +60,9 @@
   },
   "devDependencies": {
     "@haensl/eslint-config": "^1.3.0",
-    "eslint": "^7.17.0",
-    "husky": "^4.3.7",
-    "jest": "^26.6.3",
-    "jest-junit": "^12.0.0"
+    "eslint": "^8.9.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "jest-junit": "^13.0.0"
   }
 }
