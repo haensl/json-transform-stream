@@ -1,6 +1,6 @@
 {
   "name": "@haensl/json-transform-stream",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A Node.js Transform stream to wrap JSON data.",
   "main": "index.js",
   "publishConfig": {
@@ -63,6 +63,6 @@
     "eslint": "^8.9.0",
     "husky": "^8.0.3",
     "jest": "^29.3.1",
-    "jest-junit": "^15.0.0"
+    "jest-junit": "^16.0.0"
   }
 }

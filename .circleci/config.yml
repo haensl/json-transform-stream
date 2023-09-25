@@ -94,19 +94,6 @@ commands:
             npm i -S @haensl/json-transform-stream@${VERSION}
             cp ~/json-transform-stream/json-transform-stream.package.test.js ./
 
-  package-information:
-    steps:
-      - run:
-          name: install tree
-          command: sudo apt-get -y install tree
-      - run:
-          name: gather bundle information
-          command: |
-            npm info @haensl/json-transform-stream@${VERSION} > ./bundle.info
-            tree -s node_modules/@haensl/json-transform-stream >> ./bundle.info
-      - store_artifacts:
-          path: bundle.info
-
 workflows:
   version: 2
   default:
@@ -139,7 +126,7 @@ workflows:
 jobs:
   lint:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/json-transform-stream
     steps:
       - init
@@ -155,7 +142,7 @@ jobs:
 
   test:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/json-transform-stream
     steps:
       - init
@@ -168,7 +155,7 @@ jobs:
 
   ensure-versioned-correctly:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/json-transform-stream
     steps:
       - init
@@ -198,7 +185,7 @@ jobs:
 
   bundle:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/json-transform-stream
     steps:
       - init
@@ -225,7 +212,7 @@ jobs:
 
   bundle-test:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: /tmp/test-app
     steps:
       - init
@@ -236,7 +223,7 @@ jobs:
 
   publish:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: ~/json-transform-stream
     steps:
       - attach_workspace:
@@ -251,7 +238,7 @@ jobs:
 
   package-test:
     docker:
-      - image: circleci/node:lts
+      - image: cimg/node:lts
     working_directory: /tmp/test-app
     steps:
       - init
