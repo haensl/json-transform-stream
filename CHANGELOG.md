@@ -1,3 +1,6 @@
+## 1.0.5
+* [#11: Update dependencies.](https://github.com/haensl/json-transform-stream/issues/11)
+
 ## 1.0.4
 * [#9: Update dependencies.](https://github.com/haensl/json-transform-stream/issues/9)
 
